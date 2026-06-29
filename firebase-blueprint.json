@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role, wallet balance, and status",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "walletBalance": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "walletBalance", "status"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "System announcements posted by admins",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "createdAt"]
+    },
+    "Package": {
+      "title": "Package",
+      "description": "Store package/service offered",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string", "enum": ["guild_glory", "uid_topup", "likes_boost", "level_boost", "social_boost"] },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price", "category", "description"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer service order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "packageId": { "type": "string" },
+        "packageName": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Processing", "Completed", "Rejected"] },
+        "transactionId": { "type": "string" },
+        "screenshotUrl": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "details": { "type": "object" }
+      },
+      "required": ["userId", "userEmail", "packageId", "packageName", "price", "category", "status", "transactionId", "timestamp"]
+    },
+    "PaymentSetting": {
+      "title": "PaymentSetting",
+      "description": "Payment wallet configuration for eSewa, Khalti, and Binance Pay with logo and notice settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "esewaNumber": { "type": "string" },
+        "esewaQr": { "type": "string" },
+        "khaltiNumber": { "type": "string" },
+        "khaltiQr": { "type": "string" },
+        "binanceAddress": { "type": "string" },
+        "binanceQr": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "notice": { "type": "string" }
+      },
+      "required": ["esewaNumber", "khaltiNumber", "binanceAddress"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profile collection"
+    },
+    "announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "Announcements collection"
+    },
+    "packages/{packageId}": {
+      "schema": "Package",
+      "description": "Store packages collection"
+    },
+    "orders/{orderId}": {
+      "schema": "Order",
+      "description": "Store orders collection"
+    },
+    "payment_settings/{settingId}": {
+      "schema": "PaymentSetting",
+      "description": "Payment settings single document"
+    }
+  }
+}

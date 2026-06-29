@@ -1,0 +1,6 @@
+{
+  "name": "FF SERVICE NEPAL",
+  "description": "Premium gaming e-commerce and boosting platform with Free Fire boosters, UID topups, payment receipt uploads, and an advanced admin dashboard panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
