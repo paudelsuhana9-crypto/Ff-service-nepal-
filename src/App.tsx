@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
-import { auth, db } from "./lib/firebase";
+import { auth, db, handleFirestoreError, OperationType } from "./lib/firebase";
 import { seedDatabase } from "./lib/dbSeeder";
 import { UserProfile } from "./types";
 import logoImg from "./assets/images/nepal_ff_logo_1782647638107.jpg";
@@ -46,6 +46,7 @@ export default function App() {
       },
       (error) => {
         console.error("Failed to fetch brand logo:", error);
+        handleFirestoreError(error, OperationType.GET, "payment_settings/default");
       }
     );
     return () => unsubscribe();

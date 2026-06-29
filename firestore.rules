@@ -40,7 +40,7 @@ service cloud.firestore {
 
     // Match payment_settings
     match /payment_settings/{settingId} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isAdmin();
     }
   }
